@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Your App</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Leetcode</h1>
+    </header>
+
+    <main>
+        <section id="signup">
+            <h2>Sign Up</h2>
+            <form action="/signup" method="POST">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </section>
+
+        <section id="login">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" name="email" required>
+
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <section id="questions">
+            <h2>Questions</h2>
+            <form action="/questions" method="GET">
+                <button type="submit">Go to Questions</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Leetcode. All rights reserved.</p>
+    </footer>
+</body>
+</html>
