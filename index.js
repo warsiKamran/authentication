@@ -5,20 +5,28 @@ const port = 3000;
 app.use(express.json()); // Parse JSON data in the request body
 app.use(express.urlencoded({ extended: true })); 
 
-const USERS = [];
+const USERS = [{
+    name: "kamran",
+    userId: "user1"
+}];
 
 const QUESTIONS = [{
     title: "Two states",
     description: "Given an array , return the maximum of the array?",
+    quesId: "q1",
     testCases: [{
         input: "[1,2,3,4,5]",
-        output: "5"
+        output: "5",
     }]
 }];
 
-const SUBMISSION = [
+const SUBMISSION = [{
+    userId: "user1",
+    quesId: "q1",
+    status: "solved"
+}]
 
-]
+
 
 app.post('/signup', (req,res)=>{
 
@@ -31,7 +39,6 @@ app.post('/signup', (req,res)=>{
         const newUser = {email,password};
         USERS.push(newUser);
     }
-
     res.status(200).send("Profile created successfully");
 });
 
@@ -64,8 +71,49 @@ app.get('/back', (req,res)=>{
 });
 
 app.get('/submissions', (req,res)=>{
-    res.send("Hello from submissions");
+    
+    const userId = req.query.userId;
+    const quesId = req.query.quesId;
+    
+    //finding the user
+    const user = USERS.find(user=>user.userId===userId);
+
+    if(!user){
+        return res.status(400).send("User not found");
+    }
+
+    //finding the question
+    const question = QUESTIONS.find(ques=>ques.quesId===quesId);
+
+    if(!question){
+        return res.status(400).send("Question not found");
+    }
+
+    //storing the user submission
+    const userSubmission = SUBMISSION.filter(it=>it.userId===userId && it.quesId===quesId);
+    res.json(userSubmission);
 });
+
+
+app.post('/compile', (req,res)=>{
+
+    const userId = req.body.userId;
+    const quesId = req.body.quesId;
+    const solution = req.body.solution;
+
+    const isAccepted = Math.floor(Math.random()*2);
+
+    const ans = {
+        uid: userId,
+        qid: quesId,
+        code: solution,
+        status: isAccepted ? "All test cases passed" : "Compilation error"
+    };
+
+    SUBMISSION.push(ans);
+    return res.status(200).json(ans);
+});
+
 
 //integrating html and css
 app.use(express.static(__dirname + "/public/"));
