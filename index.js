@@ -115,6 +115,18 @@ app.post('/compile', (req,res)=>{
 });
 
 
+//admin section
+app.post('/admin', (req,res)=>{
+
+    const newProblem = {
+        title: req.body.title,
+        description: req.body.description
+    };
+
+    QUESTIONS.push(newProblem);
+    return res.status(200).json(newProblem);
+});
+
 //integrating html and css
 app.use(express.static(__dirname + "/public/"));
 

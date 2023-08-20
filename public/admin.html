@@ -1,0 +1,12 @@
+<form action="/admin" method="POST">
+    <input type="hidden" name="isAdmin" value="true"> <!-- Assuming you can set this value for admin users -->
+    <label for="title">Problem Title:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="description">Problem Description:</label>
+    <textarea id="description" name="description" rows="6" required></textarea>
+
+    <!-- Other input fields for problem details... -->
+
+    <button type="submit">Add Problem</button>
+</form>
