@@ -52,7 +52,6 @@ app.post('/login', (req,res)=>{
     }
 
     if(userExists && userExists.password===password){
-
         const randomToken = "akfhrperfdo";
         return res.status(200).json({message: "Login Successfull", randomToken});
     } else{
